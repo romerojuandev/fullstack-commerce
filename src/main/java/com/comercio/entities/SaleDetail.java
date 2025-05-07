@@ -34,7 +34,7 @@ public class SaleDetail {
 
     @PrePersist
     @PreUpdate
-    private void subtotal(){
+    public void subtotal(){
         this.subtotal = unitaryPrice.multiply(BigDecimal.valueOf(quantity));
     }
 }

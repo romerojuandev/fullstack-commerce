@@ -8,6 +8,6 @@ import java.util.Optional;
 public interface ISaleDAO {
     List<Sale> findAll();
     Optional<Sale> findById(Long id);
-    void save(Sale sale);
+    Sale save(Sale sale);
     void deleteById(Long id);
 }

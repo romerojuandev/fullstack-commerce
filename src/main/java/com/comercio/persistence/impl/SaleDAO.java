@@ -26,8 +26,9 @@ public class SaleDAO implements ISaleDAO {
     }
 
     @Override
-    public void save(Sale sale) {
+    public Sale save(Sale sale) {
         this.saleRepository.save(sale);
+        return sale;
     }
 
     @Override
