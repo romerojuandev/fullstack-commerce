@@ -4,16 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class SaleDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +25,65 @@ public class SaleDetail {
     @NotNull
     private BigDecimal unitaryPrice;
     private BigDecimal subtotal;
+
+    public SaleDetail() {}
+
+    // Constructor con parámetros
+    public SaleDetail(Sale sale, Product product, Integer quantity, BigDecimal unitaryPrice) {
+        this.sale = sale;
+        this.product = product;
+        this.quantity = quantity;
+        this.unitaryPrice = unitaryPrice;
+        this.subtotal = unitaryPrice.multiply(BigDecimal.valueOf(quantity));
+    }
+
+    // Getters y Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Sale getSale() {
+        return sale;
+    }
+
+    public void setSale(Sale sale) {
+        this.sale = sale;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+        this.subtotal = unitaryPrice.multiply(BigDecimal.valueOf(quantity));
+    }
+
+    public BigDecimal getUnitaryPrice() {
+        return unitaryPrice;
+    }
+
+    public void setUnitaryPrice(BigDecimal unitaryPrice) {
+        this.unitaryPrice = unitaryPrice;
+        this.subtotal = unitaryPrice.multiply(BigDecimal.valueOf(quantity));
+    }
+
+    public BigDecimal getSubtotal() {
+        return subtotal;
+    }
+
 
     @PrePersist
     @PreUpdate
